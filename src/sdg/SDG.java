@@ -2,10 +2,7 @@ package sdg;
 
 import Jama.Matrix;
 
-/**
- *
- * @author bryan.johnson
- */
+
 public class SDG {
 
     public ApproxGlobal Solve(Equation equation, Noise noise, Mesh mesh, int polynomialDegree)

@@ -2,10 +2,7 @@ package sdg;
 import equations.*;
 import solutions.*;
 
-/**
- *
- * @author bryan.johnson
- */
+
 public class Main {
 
     /**

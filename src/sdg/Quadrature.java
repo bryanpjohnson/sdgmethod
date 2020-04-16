@@ -1,9 +1,6 @@
 package sdg;
 
-/**
- *
- * @author bryan.johnson
- */
+
 public class Quadrature {
 
     static int gaussianNodeCount = 9;

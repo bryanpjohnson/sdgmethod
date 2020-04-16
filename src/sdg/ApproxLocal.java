@@ -2,10 +2,7 @@ package sdg;
 
 import Jama.Matrix;
 
-/**
- *
- * @author bryan.johnson
- */
+
 public class ApproxLocal {
     
     Element element;

@@ -1,10 +1,7 @@
 package equations;
 import sdg.Equation;
 
-/**
- *
- * @author bryan.johnson
- */
+
 public class Equation7 extends Equation {
 
     public Equation7() {

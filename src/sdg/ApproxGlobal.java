@@ -1,9 +1,5 @@
 package sdg;
 
-/**
- *
- * @author bryan.johnson
- */
 public class ApproxGlobal {
     
     ApproxLocal[] localApproximations;

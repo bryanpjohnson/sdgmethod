@@ -2,10 +2,7 @@ package solutions;
 import sdg.Equation;
 import sdg.Exact;
 
-/**
- *
- * @author bryan.johnson
- */
+
 public class Solution6 extends Exact {
 
     double alpha = 0.1;

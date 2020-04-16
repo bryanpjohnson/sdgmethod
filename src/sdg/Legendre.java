@@ -1,9 +1,6 @@
 package sdg;
 
-/**
- *
- * @author bryan.johnson
- */
+
 public class Legendre {
     
     public static double basis(int degree, double x)

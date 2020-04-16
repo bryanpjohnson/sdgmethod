@@ -2,10 +2,7 @@ package sdg;
 
 import java.util.Random;
 
-/**
- *
- * @author bryan.johnson
- */
+
 public class Noise {
     
     public double[] discreteNoise;

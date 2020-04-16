@@ -1,9 +1,6 @@
 package sdg;
 
-/**
- *
- * @author bryan.johnson
- */
+
 public class Mesh {
     
     public double lowerEndpoint;

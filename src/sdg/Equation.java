@@ -1,9 +1,6 @@
 package sdg;
 
-/**
- *
- * @author bryan.johnson
- */
+
 public abstract class Equation {
 
     public double x0;
