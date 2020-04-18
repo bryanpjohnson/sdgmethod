@@ -24,7 +24,6 @@ public class Noise {
 	return total;
     }
     
-    //FIX ME
     public void segmentNoise(int segments)
     {
         double[] segmentedNoise = new double[segments];
