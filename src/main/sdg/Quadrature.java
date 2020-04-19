@@ -1,6 +1,9 @@
 package sdg;
 
-
+/**
+ * Node points and weights for a Gaussian quadrature.  These are used
+ * to approximate the integrals required by the SDG method.
+ */
 public class Quadrature {
 
     static int gaussianNodeCount = 9;
