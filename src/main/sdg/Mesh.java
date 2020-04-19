@@ -1,6 +1,5 @@
 package sdg;
 
-
 /**
  * Represents the one-dimensional geometric partitioning of the domain we are solving the SDE on.
  * Each mesh contains non-overlapping elements with varying lengths

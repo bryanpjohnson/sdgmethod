@@ -4,30 +4,30 @@ import sdg.Equation;
 
 /**
  * Represents the SDE:
- *  dX(t) = e^t dt + dW(t)
+ *  [2X(t)/(1+t) + (1+t)^2] dt + (1+t)^2 dW(t)
  */
-public class Linear1 extends Equation {
+public class Linear3 extends Equation {
 
-    public Linear1(double x0, double t0, double tN) {
+    public Linear3(double x0, double t0, double tN) {
         super(x0, t0, tN);
     }
     
     @Override
     public double drift(double X, double t)
     {
-        return Math.exp(t);
+        return 2 * X / (1 + t) + Math.pow(1 + t, 2);
     }
         
     @Override
     public double driftPrime(double X, double t)
     {
-        return 0;
+        return 2 / (1 + t);
     }
     
     @Override
     public double diffusion(double X, double t)
     {
-        return 1;
+        return Math.pow(1 + t, 2);
     }
     
     @Override    
@@ -43,7 +43,7 @@ public class Linear1 extends Equation {
     }
 
     @Override
-    public double exactSolution(double t, double totalNoise){
-        return Math.exp(t) - 1 + totalNoise;
+    public double exactSolution(double t, double totalNoise) {
+        return Math.pow(1 + t, 3) + Math.pow(1 + t, 2) * totalNoise;
     }
 }

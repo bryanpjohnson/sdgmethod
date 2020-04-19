@@ -139,9 +139,9 @@ public class SDG {
                 // Integral1 can be simplified using Legendre properties, since there is a known formula for
                 // integral p_i * p'_j over the domain [-1, 1]. By using this property, we can avoid computing
                 // derivatives of Legendre polynomials.
+                double legendreShortcut = (1 - Math.pow(-1, basisIndex + testFunctionIndex));
                 if (testFunctionIndex != 0 && basisIndex <= testFunctionIndex)
-                    integral1 += approx.coefficients.get(basisIndex, 0) *
-                            (1 - Math.pow(-1, basisIndex + testFunctionIndex));
+                    integral1 += approx.coefficients.get(basisIndex, 0) * legendreShortcut;
 
                 // We comment out the function evaluation at t=1 because it is always = 1 by definition.
                 // Leaving the code in so the computations are easier to follow.
@@ -151,9 +151,9 @@ public class SDG {
                 // Jacobian integrals are different for each basis/test function combination.
                 double jacobianIntegral1 = 0;
                 if (testFunctionIndex != 0 && basisIndex <= testFunctionIndex)
-                    jacobianIntegral1 = (1 - Math.pow(-1, basisIndex + testFunctionIndex));
+                    jacobianIntegral1 = legendreShortcut;
 
-                // Use a Gaussian quadrature to jacobian_integral2.
+                // Use a Gaussian quadrature for the second jacobian integral.
                 double jacobianIntegral2 = 0;
                 for (int gaussianIndex = 0; gaussianIndex < Quadrature.gaussianNodeCount; gaussianIndex++)
                 {
