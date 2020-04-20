@@ -15,7 +15,35 @@ public class Noise {
      */
     public Noise(Mesh mesh)
     {
-        this.discreteNoise = generateNoise(mesh);
+        Random random = new Random();
+        this.discreteNoise = generateNoise(mesh, random);
+    }
+
+    /**
+     * Constructor for Noise with fixed random seed.
+     * @param mesh Instance of the sgd.Mesh class.
+     */
+    public Noise(Mesh mesh, long randomSeed)
+    {
+        Random random = new Random(randomSeed);
+        this.discreteNoise = generateNoise(mesh, random);
+    }
+
+    /**
+     * Sums the noise up until the i^th element.
+     * @param stopIndex The i^th element to sum to.
+     * @return double -- cumulative noise.
+     */
+    public double sumUntil(int stopIndex)
+    {
+        double total = 0;
+
+        for (int i = 0; i <= stopIndex; i++)
+        {
+            total += this.discreteNoise[i];
+        }
+
+        return total;
     }
 
     /**
@@ -24,65 +52,19 @@ public class Noise {
      */
     public double sum()
     {
-        double total = 0;
-
-        for (int i = 0; i < discreteNoise.length; i++)
-        {
-                total += discreteNoise[i];
-        }
-
-        return total;
-    }
-
-    /**
-     * Aggregates the noise into fewer bins.
-     *
-     * For example, suppose we have a mesh of size 4 with noise (W) on each elements. If we wish to approximate
-     * this domain with only 2 elements, we can collapse the noise by summing across the original elements.
-     *      original noise = [W0, W1, W2, W3]
-     *      binned noise = [W0+W1, W2+W3]
-     *
-     * This will be used for simulation purposes if we want to change the partitioning size.
-     *
-     * @param segments Number of new segments
-     */
-    public void binNoise(int segments)
-    {
-        // Make sure that simulated noise length is evenly divisible by the requested number of bins.
-        if (this.discreteNoise.length % segments != 0) {
-            throw new IllegalArgumentException(
-                    "The original simulated noise of length " + this.discreteNoise.length +
-                            " is not evenly divisible by the requested number of bins: " + segments);
-        }
-
-        double[] binnedNoise = new double[segments];
-	    int step = discreteNoise.length / segments;
-
-        for (int i = 0; i < segments; i++)
-        {
-            double value = 0;
-
-            for (int j = i*step; j < (i + 1)*step; ++j)
-            {
-                value += discreteNoise[j];
-            }
-
-            binnedNoise[i] = value;
-        }
-
-        this.discreteNoise = binnedNoise;
+        return sumUntil(this.discreteNoise.length - 1);
     }
 
     /**
      * Generates Gaussian random noise (Brownian motion) on the defined mesh.
      *
      * @param mesh Instance of the main.sdg.Mesh class.
+     * @param random Instance of java.util.Random class (instantiate with fixed seed if you want determinism).
      * @return Double array with the total noise on each mesh element.
      */
-    private double[] generateNoise(Mesh mesh)
+    private double[] generateNoise(Mesh mesh, Random random)
     {
         double[] noise = new double[mesh.numberElements];
-        Random random = new Random();
         
         for(int k = 0; k < mesh.numberElements; k++)
         {

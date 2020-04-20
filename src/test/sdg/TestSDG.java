@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 
 @RunWith(Parameterized.class)
-public class TestTerminalApproximation {
+public class TestSDG {
 
     @Parameterized.Parameters()
     public static Iterable<Object> data() {
@@ -34,35 +34,34 @@ public class TestTerminalApproximation {
 
     private Equation equation;
 
-    public TestTerminalApproximation(Equation equation) {
+    public TestSDG(Equation equation) {
         this.equation = equation;
     }
 
     @Test
-    public void test() {
-        double[] exactAndApprox = terminalApprox(this.equation);
-        assertEquals(exactAndApprox[0], exactAndApprox[1], 10e-5);
-    }
-
-    private double[] terminalApprox(Equation equation) {
+    public void testApproximation() {
         // Generate a mesh with 100 elements on the time interval [t0, T].
         int N = 100;
         Mesh mesh = new Mesh(equation.t0, equation.tN, N);
-        Noise noise = new Noise(mesh);
+        Noise noise = new Noise(mesh, 10);
 
-        // We will use SDG method to approximate with a polynomial degree of p = 2.
-        int p = 2;
+        // We will use SDG method to approximate with a polynomial degree of p = 4.
+        int p = 4;
         SDG sdg = new SDG();
         ApproxGlobal approxGlobal = sdg.Solve(equation, noise, mesh, p);
-        ApproxLocal finalElementApprox = approxGlobal.localApproximations[N-1];
 
-        // Get the approximation at time = T (terminal node in the last local approx).
-        double approxT = finalElementApprox.terminal();
+        // For every element, we check that the approximation at the endpoint is within 10e-10
+        // of the analytical solution.
+        for(int i = 0; i < approxGlobal.localApproximations.length; i++){
+            ApproxLocal local = approxGlobal.localApproximations[i];
 
-        // Compute the exact solution at time T.
-        double totalNoise = noise.sum();
-        double exactT = equation.exactSolution(equation.tN, totalNoise);
+            double totalNoise = noise.sumUntil(i);
+            double t = mesh.elements[i].upperEndpoint;
 
-        return new double[] {exactT, approxT};
+            double expected = this.equation.exactSolution(t, totalNoise);
+            double actual = local.terminal();
+
+            assertEquals(expected, actual, 10e-10);
+        }
     }
 }
