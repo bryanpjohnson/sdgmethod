@@ -19,7 +19,7 @@ public class SDG {
      */
     public ApproxGlobal Solve(Equation equation, Noise noise, Mesh mesh, int polynomialDegree)
     {
-        // The global approximation object will hold all of the local approximations.1
+        // The global approximation object will hold all of the local approximations.
         ApproxGlobal approxGlobal = new ApproxGlobal(mesh);
 
         // Initialize boundary. We pass in element 0 (when it should actually be element -1).
