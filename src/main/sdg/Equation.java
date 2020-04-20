@@ -11,9 +11,9 @@ package sdg;
  *      - σ is the diffusion function to implement.
  *
  *  You must also implement:
- *      - the driftPrime function -- the first derivative of μ with respect to t.
- *      - the diffusionPrime function -- the first derivative of σ with respect to t.
- *      - the diffusionDoublePrime function -- the second derivative of σ with respect to t.
+ *      - the driftPrime function -- the first derivative of μ with respect to X.
+ *      - the diffusionPrime function -- the first derivative of σ with respect to X.
+ *      - the diffusionDoublePrime function -- the second derivative of σ with respect to X.
  *
  *  If your equation has a known (exact) solution, override the exactSolution function.
  */
