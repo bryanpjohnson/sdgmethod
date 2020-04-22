@@ -1,5 +1,5 @@
 # sdgmethod
-Example Java implementation of the Stochastic Discontinuous Galerkin Method for approximating the solution to ordinary stochastic differential equations.
+Java implementation of the Stochastic Discontinuous Galerkin Method for approximating the solution to ordinary stochastic differential equations.
 
 This method was first described by Mahboub Baccouch and myself in the following paper:
 
